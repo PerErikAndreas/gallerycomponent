@@ -37,7 +37,7 @@ app.get('/api/search', async (req, res) => {
 
     // Get Flicker-specific search parameters from the request or use defaults
     const searchWords = req.query.text || 'östersund';
-    const photosPerPage = req.query.per_page || 10;
+    const photosPerPage = 50;
     const page = req.query.page || 1;
 
     // Use dynamic import instead of require for better ES module support

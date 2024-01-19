@@ -36,7 +36,7 @@ Andreas Photo Gallery is a simple web application that allows users to search fo
 
 ### Installation
 
-1. Clone the repository: ```bash git clone <repository-url>
+1. Clone the repository: ```bash git clone https://github.com/PerErikAndreas/gallerycomponent.git
 OR download the folder ANDREAS-CYGNI-TEST.
 
 2. Navigate to the project directory:
