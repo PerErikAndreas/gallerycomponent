@@ -1,0 +1,7 @@
+// By setting this, Babel knows what environment to transpile to older JavaScript versions and make 
+// it readable for a broders range of enviroments
+{
+    "presets": [
+        ["@babel/preset-env", { "targets": { "node": "current" } }]
+    ]
+}
