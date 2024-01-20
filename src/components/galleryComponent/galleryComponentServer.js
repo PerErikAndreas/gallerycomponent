@@ -1,24 +1,32 @@
 // Load environment variables from the .env file
 require('dotenv').config();
 
+// Imports Express
 const express = require('express');
+
+// Imports path for constructing file paths
 const path = require('path');
+
+// Middleware make it possible to make request from different domains
 const cors = require('cors');
 
+// Creating App
 const app = express();
+
+// Port the server will run on
 const PORT = 3000;
 
-// Serve static files from the 'public' directory (including your index.html)
-app.use(express.static(path.join(__dirname, 'public')));
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, '..', '..', 'public')));
 
 app.use(cors());
 
 // Root route: Serve the index.html file
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', '..', 'public', 'index.html'));
 });
 
-// Other API routes
+// API INFO ROUTES
 app.get('/api/info', (req, res) => {
   res.send({
     Hello: "Welcome to Andreas photogallery API",
@@ -29,7 +37,7 @@ app.get('/api/info', (req, res) => {
   });
 });
 
-// Search route: here we fetch data from Flickr API
+// API SEARCH ROUTE
 app.get('/api/search', async (req, res) => {
   try {
     // Get the Flickr API key from the .env-file
@@ -37,8 +45,8 @@ app.get('/api/search', async (req, res) => {
 
     // Get Flicker-specific search parameters from the request or use defaults
     const searchWords = req.query.text || 'östersund';
-    const photosPerPage = 50;
-    const page = req.query.page || 2;
+    const photosPerPage = 25;
+    const page = req.query.page || 1;
 
     // Use dynamic import instead of require for better ES module support
     const { default: fetch } = await import('node-fetch');

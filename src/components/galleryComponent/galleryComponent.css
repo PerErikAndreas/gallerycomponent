@@ -1,7 +1,7 @@
 /* Variables */
 
 :root {
-    --primary-color: #73ab95;
+    --primary-color: #ffffff;
     --primary-text-color: #ffffff;
     --border-radius: 10px;
     --button-width: 80px;
@@ -26,9 +26,17 @@
   .gallerycomponent-header-input {
     border: none;
     border-radius: var(--border-radius);
-    width: 20vw;
+    background-color: #f0f0f0;
+    width: 70%;
     padding: 10px;
-    margin: 10px;
+    margin: 16px;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .gallerycomponent-header-input {
+      width: 60%;
+      max-width: 400px;;
+    }
   }
   
   .gallerycomponent-header-button {
@@ -36,13 +44,14 @@
     border-radius: var(--border-radius);
     width: 80px;
     padding: 10px;
-    margin: 10px;
   }
 
   .gallerycomponent-gallery-container {
     display: grid;
-    margin-top: 63px;
+    margin-top: 49px;
     grid-gap: 16px;
+    padding: 16px;
+    background: var(--primary-color);
   }
   
   @media only screen and (max-width: 767px) {
@@ -68,7 +77,6 @@
     border-radius: var(--border-radius);
   }
 
-  /* Tablet and Larger Screens */
   @media only screen and (min-width: 768px) {
     .gallerycomponent-gallery-img {
       height: 200px; /* Set your desired fixed height for tablet and larger screens */
