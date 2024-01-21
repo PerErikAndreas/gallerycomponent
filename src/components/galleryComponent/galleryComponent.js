@@ -9,15 +9,12 @@ import { API_URLS } from './urls.js';
 //////////////////////////////////////////////////////////////////////////////
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Get reference to the main container where everything will be rendered.
-  const mainContainer = document.getElementById("galleryComponent");
+  // Connection for the component container where everything will be rendered.
+  const galleryComponent = document.getElementById("galleryComponent");
   let currentPage = 1;
 
-  // Create and append the galleryComponent
-  const galleryComponent = createGalleryComponent();
-
   // Append the galleryComponent to the main container
-  mainContainer.appendChild(galleryComponent);
+  galleryComponent.appendChild(createGalleryComponent());
 
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////// ENDLESS SCROLL /////////////////////////////////

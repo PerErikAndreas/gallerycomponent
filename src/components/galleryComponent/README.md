@@ -1,19 +1,19 @@
-# Andreas Photo Gallery
+# galleryComponent
 
-Andreas Gallery Component is a simple web application that allows users to search for images using the Flickr API. 
-The application consists of a server (built with Node.js and Express) and a client-side gallery (built with Vanilla JavaScript, HTML, and CSS).
+galleryComponent is a straightforward component enabling users to search for images through the Flickr API. 
+The application uses a server and features a client-side search bar and a gallery for displaying the search results.
 
 ## Features
 
 - **Search Function:** Users can enter search words, and the gallery will display images related to the entered word.
 - **Dynamic Loading:** The gallery supports dynamic loading, allowing users to load more images as they scroll to the bottom.
-- **Responsive Design:** The gallery is designed to be responsive, providing a seamless experience across various devices and browsers.
+- **Responsive Design:** The component is designed to be responsive, providing a seamless experience across various devices and browsers.
 
 ## Getting Started
 
 ### Requirements
 
-- [Node.js](https://nodejs.org/) installed on your machine. I use Node.js v18.14.2.
+- [Node.js](https://nodejs.org/) installed on your machine (I used Node.js v18.14.2).
 
 ### Dependencies
 
