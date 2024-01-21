@@ -1,28 +1,59 @@
-/////////////////////////////////////////////////
-//////////////////// IMPORTS ////////////////////
-/////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+///////////////////////////////// IMPORTS ////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
 import { API_URLS } from './urls.js';
 
-/////////////////////////////////////////////////
-//////////////// EVENT LISTENERS ////////////////
-/////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+///////////////////////////// EVENT LISTENERS ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Get references to other HTML elements where JavaScript elements will be rendered.
-  const galleryComponentContainer = document.getElementById("gallerycomponent-gallery-container");
-  const loader = document.getElementById("gallerycomponent-loader");
+  // Get reference to the main container where everything will be rendered.
+  const mainContainer = document.getElementById("galleryComponent");
   let currentPage = 1;
 
-  // Create and append the header
-  createHeader();
+  // Create and append the galleryComponent
+  const galleryComponent = createGalleryComponent();
 
-  /////////////////////////////////////////////////
-  /////////// CREATE THE STATIC HEADER ////////////
-  /////////////////////////////////////////////////
+  // Append the galleryComponent to the main container
+  mainContainer.appendChild(galleryComponent);
+
+//////////////////////////////////////////////////////////////////////////////
+///////////////////////////// ENDLESS SCROLL /////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+  // Attach a scroll event listener to the window
+  window.addEventListener("scroll", function () {
+    // Check if the user has scrolled to the bottom
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+      // Increment the page number and fetch more results
+      currentPage++;
+      fetchResults();
+    }
+  });
+
+//////////////////////////////////////////////////////////////////////////////
+////////////////////////// CREATE MAIN COMPONENT /////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+  function createGalleryComponent() {
+    // GALLERY-CONTAINER
+    const galleryComponent = document.createElement("div");
+    galleryComponent.className = "gallerycomponent-container";
+
+    // Create and append the header
+    const header = createHeader();
+    galleryComponent.appendChild(header);
+
+    return galleryComponent;
+  }
+
+//////////////////////////////////////////////////////////////////////////////
+////////////////////////////// CREATE HEADER /////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
   function createHeader() {
-
     // HEADER-DIV
     const header = document.createElement("div");
     header.className = "gallerycomponent-header-container";
@@ -51,9 +82,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Append the form to the header
     header.appendChild(searchForm);
 
-    // Append the header to the galleryComponent container
-    document.body.appendChild(header);
-
     // Attach an event listener to the search form
     searchForm.addEventListener("submit", function (event) {
       event.preventDefault(); // Prevent the default form submission behavior
@@ -65,67 +93,80 @@ document.addEventListener("DOMContentLoaded", function () {
       fetchResults();
     });
 
-    // Attach a scroll event listener to the window
-    window.addEventListener("scroll", function () {
-      // Check if the user has scrolled to the bottom
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-        // Increment the page number and fetch more results
-        currentPage++;
-        fetchResults();
-      }
-    });
+    return header;
   }
 
-  /////////////////////////////////////////////////
-  /////////////// FETCH THE PHOTOS ////////////////
-  /////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////// CREATE PHOTO CONTAINER //////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
 
-  // Function to fetch results
-  function fetchResults() {
-    // Get the trimmed search term from the input field
-    const searchTerm = document.getElementById("gallerycomponent-header-input").value.trim();
+  function createPhotoContainer(photo) {
+    const photoContainer = document.createElement("div");
+    photoContainer.classList.add("photo-container");
+  
+    const imgElement = document.createElement("img");
+    imgElement.src = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`;
+    imgElement.alt = photo.title;
+    imgElement.classList.add("gallerycomponent-gallery-img");
+  
+    photoContainer.appendChild(imgElement);
+  
+    return photoContainer;
+  }
 
-    // Show loading indicator
-    loader.style.display = "block";
+//////////////////////////////////////////////////////////////////////////////
+/////////////////////////////// CREATE LOADER ////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////
 
-    // Make a fetch call to the server using the centralized URL
+  function createLoader() {
+    const loader = document.createElement("div");
+    loader.textContent = "Loading...";
+    loader.className = "loader";
+
+    galleryComponent.appendChild(loader);
+
+    return loader;
+  }
+//////////////////////////////////////////////////////////////////////////////
+///////////////////////// FETCH THE PHOTO FROM SERVER ////////////////////////
+//////////////////////////////////////////////////////////////////////////////
+
+// Inside your fetchResults function
+function fetchResults() {
+  const searchInput = document.getElementById("gallerycomponent-header-input");
+
+  if (searchInput) {
+    const searchTerm = searchInput.value.trim();
+    const loader = createLoader();
+    document.body.appendChild(loader);
+    const photoContainer = document.createElement("div");
+
     fetch(`${API_URLS.SEARCH}?text=${searchTerm}&page=${currentPage}`)
       .then((response) => {
         if (!response.ok) {
-          // If the response status is not OK, throw an error
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        return response.json(); // Return as JSON
+        return response.json();
       })
       .then((data) => {
-        console.log("Data from server and Flickr API:", data);
+        photoContainer.innerHTML = "";
 
-        // If there's new data, this clears existing photos in the gallery container to an empty string
-        galleryComponentContainer.innerHTML = "";
-
-        // Check if data.photos is in an array
         if (Array.isArray(data.photos.photo)) {
-          // Iterate over the array and create separate images from the fetched Flickr data
           data.photos.photo.forEach((photo) => {
-            const singlePhotoElement = document.createElement("img");
-            // Set the source and alt attributes for the image
-            singlePhotoElement.src = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`;
-            singlePhotoElement.alt = photo.title; // Add alt attribute for accessibility
-            singlePhotoElement.classList.add("gallerycomponent-gallery-img")
-            galleryComponentContainer.classList.add("gallerycomponent-gallery-container")
-            galleryComponentContainer.appendChild(singlePhotoElement); // Adds the singlePhotoElement and makes it a child of the gallery container
+            const photoContainer = createPhotoContainer(photo);
+            galleryComponent.appendChild(photoContainer);
           });
         } else {
           console.error("No data error: Photos do not return as an array");
         }
       })
       .catch((error) => {
-        // Handle any errors that occurred during the fetch
         console.error("Fetch error:", error);
       })
       .finally(() => {
-        // Hide loading indicator regardless of success or failure
-        loader.style.display = "none";
+        document.body.removeChild(loader);
       });
   }
-});
+}
+  }
+);
