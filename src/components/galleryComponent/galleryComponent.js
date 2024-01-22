@@ -35,7 +35,7 @@ photoContainer.addEventListener("scroll", function () {
       currentPage++;
       fetchResults();
       setTimeout(() => {
-        isFetching = false;
+        isFetching = false; // MOTIVERA DETTA
       }, 1000);
     }
   }
@@ -92,13 +92,13 @@ photoContainer.addEventListener("scroll", function () {
 
     // Attach an event listener to the search form
     searchForm.addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent the default form submission behavior
+      event.preventDefault(); // Prevent the default form submission behavior // LÄS PÅ!
 
       // Reset page number on form submission
       currentPage = 1;
 
       // Fetch results
-      fetchResults();
+      fetchResults(); // ???????
     });
 
     return header;
@@ -143,20 +143,20 @@ function fetchResults() {
   const searchInput = document.getElementById("galleryComponent-header-input");
 
   if (searchInput) {
-    const searchTerm = searchInput.value.trim();
+    const searchTerm = searchInput.value.trim(); // Removes whitespace before and after the words.
     const loader = createLoader(photoContainer);
 
     fetch(`${API_URLS.SEARCH}?text=${searchTerm}&page=${currentPage}`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
+          throw new Error(`HTTP error! Status: ${response.status}`); // läs på
         }
         return response.json();
       })
       .then((data) => {
         // photoContainer.innerHTML = "";
 
-        if (Array.isArray(data.photos.photo)) {
+        if (Array.isArray(data.photos.photo)) { // motivera detta
           data.photos.photo.forEach((photo) => {
             const imgElement = createImgElement(photo);
             photoContainer.appendChild(imgElement);
@@ -171,7 +171,7 @@ function fetchResults() {
         console.error("Fetch error:", error);
       })
       .finally(() => {
-        photoContainer.removeChild(loader);
+        photoContainer.removeChild(loader); // Settime
       });
   }
 }
