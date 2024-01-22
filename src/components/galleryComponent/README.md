@@ -53,3 +53,36 @@ npm start
 
 4. Open the gallery.html file in a web browser:
 open public/index.html
+
+project-root/
+│
+├── node_modules/
+│   (Your node modules dependencies)
+│
+├── public/
+│   ├── index.html
+│   ├── index.css
+│   └──  reset.css
+│   
+├── src/
+│   ├── components/
+│   │   ├── testFooterComponent/
+│   │   │   ├── testFooterComponent.js
+│   │   │   └── testFooterComponent.css
+│   │   │
+│   │   ├── testHeaderComponent/
+│   │   │   ├── testHeaderComponent.js
+│   │   │   └── testHeaderComponent.css
+│   │   │
+│   │   └── galleryComponent/
+│   │       ├── galleryComponent.css
+│   │       ├── galleryComponent.js
+│   │       ├── galleryComponentServer.js
+│   │       ├── README.md
+│   │       └── urls.js
+│   │
+├── .babelrc
+├── .env
+├── .gitignore
+├── package-lock.json
+└── package.json
