@@ -10,16 +10,18 @@
   }
 
   #galleryComponent {
-    height: 37vh; /* Set an appropriate height */
-    overflow-y: auto; /* Enable vertical scrolling */
+    height: 37vh;
+    overflow-y: auto;
+    margin: 16px;
+    border-radius: 10px;
   }
 
   .galleryComponent-header-container {
     position: sticky;
     top: 0;
     width: 100%;
-    background-color: red;
     height: 55px;
+    z-index: 1; /* Add z-index to ensure it's above the content in #galleryComponent */
   }
 
   .galleryComponent-header-form {
@@ -34,7 +36,7 @@
     background-color: #f0f0f0;
     width: 55%;
     padding: 10px;
-    margin: 16px;
+    margin: 0 16px 16px 0;
   }
 
   @media only screen and (min-width: 768px) {
@@ -70,7 +72,6 @@
     height: 37vh; /* Set an appropriate height */
     display: grid;
     grid-gap: 16px;
-    padding: 16px;
     background: var(--primary-color);
   }
 

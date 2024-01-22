@@ -1,4 +1,9 @@
+.testHeaderComponent-container {
+    background: palevioletred;
+    margin: 16px;
+    border-radius: 10px;
+}
 
 .testHeaderComponent-title {
-    padding: 16px 0 0 16px
+    padding: 16px;
 }
