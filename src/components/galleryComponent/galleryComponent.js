@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let isFetching = false;
   let currentPage = 1;
+  let currentScrollPosition = 0; // Variable to store the current scroll position
 
   // Append the galleryComponent to the main container
   galleryComponent.appendChild(createGalleryComponent());
@@ -25,10 +26,11 @@ document.addEventListener("DOMContentLoaded", function () {
 ///////////////////////////// ENDLESS SCROLL /////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-galleryComponent.addEventListener("scroll", function () {
+photoContainer.addEventListener("scroll", function () {
   // Check if the user has scrolled to the bottom of the galleryComponent
-  if (galleryComponent.scrollTop + galleryComponent.clientHeight >= galleryComponent.scrollHeight - 10) {
+  if (photoContainer.scrollTop + galleryComponent.clientHeight >= photoContainer.scrollHeight - 10) {
     if (!isFetching) {
+      currentScrollPosition = photoContainer.scrollTop;
       isFetching = true;
       currentPage++;
       fetchResults();
@@ -160,6 +162,7 @@ function fetchResults() {
             photoContainer.appendChild(imgElement);
           });
           galleryComponent.appendChild(photoContainer);
+          photoContainer.scrollTop = currentScrollPosition;
         } else {
           console.error("No data error: Photos do not return as an array");
         }

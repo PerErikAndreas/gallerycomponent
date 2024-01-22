@@ -9,8 +9,8 @@
 }
   #galleryComponent {
     height: 37vh;
-    /* overflow-y: auto; */
     margin: 16px;
+    border-radius: 10px;
   }
 
   .galleryComponent-header-container {
@@ -68,10 +68,11 @@
   }
 
   .galleryComponent-photoContainer {
-    height: 33vh; /* Set an appropriate height */
+    height: 32vh;
     display: grid;
     overflow-y: auto;
     grid-gap: 16px;
+    border-radius: 10px;
     background: var(--primary-color);
   }
 
