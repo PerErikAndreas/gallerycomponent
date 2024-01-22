@@ -20,15 +20,18 @@ document.addEventListener("DOMContentLoaded", function () {
 ///////////////////////////// ENDLESS SCROLL /////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-  // Attach a scroll event listener to the window
-  window.addEventListener("scroll", function () {
-    // Check if the user has scrolled to the bottom
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-      // Increment the page number and fetch more results
-      currentPage++;
-      fetchResults();
-    }
-  });
+let isFetching = false;
+
+window.addEventListener("scroll", function () {
+  if (!isFetching && window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    isFetching = true;
+    currentPage++;
+    fetchResults();
+    setTimeout(() => {
+      isFetching = false;
+    }, 1000); /////// KOLLA UPP OM DENNA FUNKAR SOM
+  }
+});
 
 //////////////////////////////////////////////////////////////////////////////
 ////////////////////////// CREATE MAIN COMPONENT /////////////////////////////
@@ -37,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function createGalleryComponent() {
     // GALLERY-CONTAINER
     const galleryComponent = document.createElement("div");
-    galleryComponent.className = "gallerycomponent-container";
+    galleryComponent.className = "galleryComponent";
 
     // Create and append the header
     const header = createHeader();
@@ -53,26 +56,26 @@ document.addEventListener("DOMContentLoaded", function () {
   function createHeader() {
     // HEADER-DIV
     const header = document.createElement("div");
-    header.className = "gallerycomponent-header-container";
+    header.className = "galleryComponent-header-container";
 
     // HEADER-INPUT
     const searchInput = document.createElement("input");
     searchInput.type = "text";
-    searchInput.id = "gallerycomponent-header-input";
+    searchInput.id = "galleryComponent-header-input";
     searchInput.name = "search-term";
     searchInput.placeholder = "Enter search words";
-    searchInput.classList.add("gallerycomponent-header-input");
+    searchInput.classList.add("galleryComponent-header-input");
 
     // HEADER-BUTTON
     const searchButton = document.createElement("button");
     searchButton.type = "submit";
     searchButton.textContent = "Search";
-    searchButton.id = "gallerycomponent-header-button";
-    searchButton.classList.add("gallerycomponent-header-button");
+    searchButton.id = "galleryComponent-header-button";
+    searchButton.classList.add("galleryComponent-header-button");
 
     // Append the input and button elements to a form element
     const searchForm = document.createElement("form");
-    searchForm.id = "gallerycomponent-header-form";
+    searchForm.id = "galleryComponent-header-form";
     searchForm.appendChild(searchInput);
     searchForm.appendChild(searchButton);
 
@@ -97,18 +100,17 @@ document.addEventListener("DOMContentLoaded", function () {
   //////////////////////// CREATE PHOTO CONTAINER //////////////////////////////
   //////////////////////////////////////////////////////////////////////////////
 
-  function createPhotoContainer(photo) {
-    const photoContainer = document.createElement("div");
-    photoContainer.classList.add("photo-container");
-  
+  function createPhotoContainer() {
+    const container = document.createElement("div");
+    container.classList.add("galleryComponent-photoContainer");
+    return container;
+  }
+
+  function createImgElement(photo) {
     const imgElement = document.createElement("img");
     imgElement.src = `https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_m.jpg`;
-    imgElement.alt = photo.title;
-    imgElement.classList.add("gallerycomponent-gallery-img");
-  
-    photoContainer.appendChild(imgElement);
-  
-    return photoContainer;
+    imgElement.classList.add("galleryComponent-photoContainer-img");
+    return imgElement;
   }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -118,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function createLoader() {
     const loader = document.createElement("div");
     loader.textContent = "Loading...";
-    loader.className = "loader";
+    loader.className = "galleryComponent-loader";
 
     galleryComponent.appendChild(loader);
 
@@ -128,15 +130,16 @@ document.addEventListener("DOMContentLoaded", function () {
 ///////////////////////// FETCH THE PHOTO FROM SERVER ////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
+const photoContainer = createPhotoContainer();
+
 // Inside your fetchResults function
 function fetchResults() {
-  const searchInput = document.getElementById("gallerycomponent-header-input");
+  const searchInput = document.getElementById("galleryComponent-header-input");
 
   if (searchInput) {
     const searchTerm = searchInput.value.trim();
     const loader = createLoader();
     document.body.appendChild(loader);
-    const photoContainer = document.createElement("div");
 
     fetch(`${API_URLS.SEARCH}?text=${searchTerm}&page=${currentPage}`)
       .then((response) => {
@@ -146,13 +149,14 @@ function fetchResults() {
         return response.json();
       })
       .then((data) => {
-        photoContainer.innerHTML = "";
+        // photoContainer.innerHTML = "";
 
         if (Array.isArray(data.photos.photo)) {
           data.photos.photo.forEach((photo) => {
-            const photoContainer = createPhotoContainer(photo);
-            galleryComponent.appendChild(photoContainer);
+            const imgElement = createImgElement(photo);
+            photoContainer.appendChild(imgElement);
           });
+          galleryComponent.appendChild(photoContainer);
         } else {
           console.error("No data error: Photos do not return as an array");
         }
