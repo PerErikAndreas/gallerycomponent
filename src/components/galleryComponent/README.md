@@ -35,6 +35,8 @@ The application uses a server and features a client-side search bar and a galler
   - Express
   - JavaScript
 
+  Styling:
+
 ### Installation
 
 1. Clone the repository: ```bash git clone https://github.com/PerErikAndreas/gallerycomponent.git

@@ -11,25 +11,31 @@ import { API_URLS } from './urls.js';
 document.addEventListener("DOMContentLoaded", function () {
   // Connection for the component container where everything will be rendered.
   const galleryComponent = document.getElementById("galleryComponent");
+  const photoContainer = createPhotoContainer();
+
+  let isFetching = false;
   let currentPage = 1;
 
   // Append the galleryComponent to the main container
   galleryComponent.appendChild(createGalleryComponent());
+  
+  fetchResults();
 
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////// ENDLESS SCROLL /////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-let isFetching = false;
-
-window.addEventListener("scroll", function () {
-  if (!isFetching && window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-    isFetching = true;
-    currentPage++;
-    fetchResults();
-    setTimeout(() => {
-      isFetching = false;
-    }, 1000); /////// KOLLA UPP OM DENNA FUNKAR SOM
+galleryComponent.addEventListener("scroll", function () {
+  // Check if the user has scrolled to the bottom of the galleryComponent
+  if (galleryComponent.scrollTop + galleryComponent.clientHeight >= galleryComponent.scrollHeight - 10) {
+    if (!isFetching) {
+      isFetching = true;
+      currentPage++;
+      fetchResults();
+      setTimeout(() => {
+        isFetching = false;
+      }, 1000);
+    }
   }
 });
 
@@ -122,7 +128,7 @@ window.addEventListener("scroll", function () {
     loader.textContent = "Loading...";
     loader.className = "galleryComponent-loader";
 
-    galleryComponent.appendChild(loader);
+    photoContainer.appendChild(loader);
 
     return loader;
   }
@@ -130,16 +136,13 @@ window.addEventListener("scroll", function () {
 ///////////////////////// FETCH THE PHOTO FROM SERVER ////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-const photoContainer = createPhotoContainer();
-
 // Inside your fetchResults function
 function fetchResults() {
   const searchInput = document.getElementById("galleryComponent-header-input");
 
   if (searchInput) {
     const searchTerm = searchInput.value.trim();
-    const loader = createLoader();
-    document.body.appendChild(loader);
+    const loader = createLoader(photoContainer);
 
     fetch(`${API_URLS.SEARCH}?text=${searchTerm}&page=${currentPage}`)
       .then((response) => {
@@ -165,7 +168,7 @@ function fetchResults() {
         console.error("Fetch error:", error);
       })
       .finally(() => {
-        document.body.removeChild(loader);
+        photoContainer.removeChild(loader);
       });
   }
 }

@@ -9,12 +9,17 @@
     --font-family: 'Roboto', sans-serif;
   }
 
+  #galleryComponent {
+    height: 37vh; /* Set an appropriate height */
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+
   .galleryComponent-header-container {
     position: sticky;
     top: 0;
     width: 100%;
+    background-color: red;
     height: 55px;
-    background: var(--primary-color);
   }
 
   .galleryComponent-header-form {
@@ -35,7 +40,7 @@
   @media only screen and (min-width: 768px) {
     .galleryComponent-header-input {
       width: 60%;
-      max-width: 400px;;
+      max-width: 400px;
     }
   }
   
@@ -49,16 +54,27 @@
 
   .galleryComponent-loader {
     padding: 16px;
+    animation: bounceToRight 0.5s infinite alternate; /* You can adjust the duration and other properties */
+  }
+  
+  @keyframes bounceToRight {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(20px); /* Adjust the distance you want the bounce to the right */
+    }
   }
 
   .galleryComponent-photoContainer {
+    height: 37vh; /* Set an appropriate height */
     display: grid;
     grid-gap: 16px;
     padding: 16px;
     background: var(--primary-color);
   }
 
-  @media only screen and (min-width: 567px) {
+  @media only screen and (min-width: 467px) {
     .galleryComponent-photoContainer {
       grid-template-columns: repeat(2, 3fr);
     }
@@ -95,13 +111,8 @@
   } */
   
   .galleryComponent-photoContainer-img {
+    height: 200px;
+    object-fit: cover;
     width: 100%;
     border-radius: var(--border-radius);
-  }
-
-  @media only screen and (min-width: 768px) {
-    .galleryComponent-photoContainer-img {
-      height: 200px;
-      object-fit: cover;
-    }
   }
