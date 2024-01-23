@@ -7,6 +7,8 @@
   --h1-fontsize: 2rem;
   --input-background-color: #f0f0f0;
   --input-button-padding: 12px;
+  --input-button-focus-color: #ececec;
+
 }
 
 /* GALLERYCOMPONENTS CONTAINER */
@@ -32,6 +34,12 @@
   padding: var(--input-button-padding);
   margin: 0 16px 16px 0;
 }
+
+.galleryComponent-header-input:focus {
+  outline: none;
+  background: #d8d7d7;
+}
+
 /* -- MAKES HEADER INPUT RESPONSIVE */
 @media only screen and (min-width: 768px) {
   .galleryComponent-header-input {
@@ -47,6 +55,10 @@
   min-width: var(--button-width);
   padding: var(--input-button-padding);
   border-radius: var(--border-radius);
+}
+
+.galleryComponent-header-button:hover {
+  background: #d8d7d7;
 }
 
 /* GALLERYCOMPONENTS LOADER */
@@ -67,8 +79,9 @@
 }
 
 /* GALLERYCOMPONENTS PHOTOCONTAINER */
+/* the height of the container decides what eventlistener that will be used for the endless scroll */
 .galleryComponent-photoContainer {
-  height: 37vh;
+  height: 58vh; /* Sets the height of the photocontainer. */
   display: grid;
   width: 100%;
   overflow-y: auto;

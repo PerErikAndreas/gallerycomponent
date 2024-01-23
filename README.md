@@ -4,9 +4,8 @@ galleryComponent is a straightforward component enabling users to search for ima
 
 ## Features
 
-- **Search Function:** Users can enter search words, and the gallery will display images related to the entered word.
+- **Search Function:** Users can enter search words, and the gallery will display images related to the entered words.
 - **Dynamic Loading:** The gallery supports dynamic loading, allowing users to load more images as they scroll to the bottom.
-- **Responsive Design:** The component is designed to be responsive, providing a seamless experience across various devices and browsers.
 
 ## Getting Started
 
@@ -79,6 +78,9 @@ ANDREAS-CYGNI-TEST/
 └── README.md
 
 ### Testing
+
+- **Unit Testing:**
+The galleryComponent was testet together with some made-up testcomponents (testFooterComponent and testHeaderComponent). This was to check its independence and if it affected the these components.
 
 - **Browser Testing:**
 The user interface and functionality of the component were tested on different web browsers, including the latest versions of Edge, Chrome, and Firefox. The testing was done using [BrowserStack](https://www.browserstack.com/) to check cross-browser compatibility.
