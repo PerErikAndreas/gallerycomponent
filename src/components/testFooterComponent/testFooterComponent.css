@@ -1,4 +1,5 @@
 .testFooterComponent-container {
+    width: 100%;
     background: palevioletred;
     margin-top: 16px;
     border-radius: 10px;

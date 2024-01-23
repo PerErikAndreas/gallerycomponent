@@ -26,16 +26,12 @@ galleryComponent is a straightforward component enabling users to search for ima
 
 ## Configuration
 
-Before you start using the galleryComponent, make sure you have your own Flickr API key. Follow these steps to set it up:
+Before you start using the galleryComponent, make sure you have your own Flickr API key.
+Follow these steps to set it up:
 
 1. Visit the Flickr App Garden to request an API Key (https://www.flickr.com/services/apps/create/).
 
 2. Inside the `.env` file, placed in this projects root, replace the FLICKR_API_KEY with your own key
-
-
-
-
-ENV filen förändringar
 
 ### Technology Stack
 
@@ -82,7 +78,15 @@ ANDREAS-CYGNI-TEST/
 ├── package.json
 └── README.md
 
-### Installation
+### Testing
+
+- **Browser Testing:**
+The user interface and functionality of the component were tested on different web browsers, including the latest versions of Edge, Chrome, and Firefox. The testing was done using [BrowserStack](https://www.browserstack.com/) to check cross-browser compatibility.
+
+- **Responsiveness Testing:**
+The responsiveness of the component was tested on a range of devices and screen sizes using the chrome extension [ResponsiveViever](https://responsiveviewer.org/).
+
+## Installation
 
 1. Clone the repository: git clone https://github.com/PerErikAndreas/gallerycomponent.git OR download the folder ANDREAS-CYGNI-TEST.
 
