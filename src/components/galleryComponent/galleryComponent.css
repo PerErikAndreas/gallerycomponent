@@ -1,120 +1,121 @@
+/* VARIABLES */
 :root {
   --primary-color: #ffffff;
   --primary-text-color: #ffffff;
   --border-radius: 10px;
-  --button-width: 80px;
+  --button-width: 7vw;
   --h1-fontsize: 2rem;
   --input-background-color: #f0f0f0;
-  --font-family: 'Roboto', sans-serif;
+  --input-button-padding: 12px;
 }
-  #galleryComponent {
-    height: 37vh;
-    margin: 16px;
-    border-radius: 10px;
-  }
 
-  .galleryComponent-header-container {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    height: 55px;
-    z-index: 1; /* Add z-index to ensure it's above the content in #galleryComponent */
-  }
+/* GALLERYCOMPONENTS CONTAINER */
+#galleryComponent {
+  height: 37vh;
+  margin: 16px;
+  border-radius: var(--border-radius);
+}
 
-  .galleryComponent-header-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+/* GALLERYCOMPONENTS HEADER CONTAINER */
+.galleryComponent-header-container {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 55px;
+  z-index: 1;
+}
+
+/* GALLERYCOMPONENTS HEADER FORM */
+.galleryComponent-header-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* GALLERYCOMPONENTS HEADER INPUT */
+.galleryComponent-header-input {
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--input-background-color);
+  width: 55%;
+  padding: var(--input-button-padding);
+  margin: 0 16px 16px 0;
+}
+/* -- MAKES HEADER INPUT RESPONSIVE */
+@media only screen and (min-width: 768px) {
   .galleryComponent-header-input {
-    border: none;
-    border-radius: var(--border-radius);
-    background-color: var(--input-background-color);
-    width: 55%;
-    padding: 10px;
-    margin: 0 16px 16px 0;
+    width: 60%;
+    max-width: 400px;
   }
+}
 
-  @media only screen and (min-width: 768px) {
-    .galleryComponent-header-input {
-      width: 60%;
-      max-width: 400px;
-    }
-  }
-  
-  .galleryComponent-header-button {
-    border: none;
-    border-radius: var(--border-radius);
-    width: 20vw;
-    max-width: 80px;
-    padding: 10px;
-    border-radius: 10px;
+/* GALLERYCOMPONENTS HEADER BUTTON */
+.galleryComponent-header-button {
+  border: none;
+  border-radius: var(--border-radius);
+  min-width: var(--button-width);
+  padding: var(--input-button-padding);
+  border-radius: var(--border-radius);
+}
 
-  }
+/* GALLERYCOMPONENTS LOADER */
+.galleryComponent-loader {
+  padding: 16px;
+  animation: bounceToRight 0.5s infinite alternate;
+}
 
-  .galleryComponent-loader {
-    padding: 16px;
-    animation: bounceToRight 0.5s infinite alternate; /* You can adjust the duration and other properties */
+/* -- MAKES LOADER BOUNCE */
+@keyframes bounceToRight {
+  0% {
+    transform: translateX(0);
   }
-  
-  @keyframes bounceToRight {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(20px); /* Adjust the distance you want the bounce to the right */
-    }
+  100% {
+    transform: translateX(20px);
   }
+}
 
+/* GALLERYCOMPONENTS PHOTOCONTAINER */
+.galleryComponent-photoContainer {
+  height: 32vh;
+  display: grid;
+  overflow-y: auto;
+  grid-gap: 16px;
+  border-radius: var(--border-radius);
+  background: var(--primary-color);
+}
+
+/* -- MAKES PHOTOCONTAINER RESPONSIVE */
+@media only screen and (min-width: 467px) {
   .galleryComponent-photoContainer {
-    height: 32vh;
-    display: grid;
-    overflow-y: auto;
-    grid-gap: 16px;
-    border-radius: 10px;
-    background: var(--primary-color);
+    grid-template-columns: repeat(2, 3fr);
   }
+}
 
-  @media only screen and (min-width: 467px) {
-    .galleryComponent-photoContainer {
-      grid-template-columns: repeat(2, 3fr);
-    }
+/* -- MAKES PHOTOCONTAINER RESPONSIVE */
+@media only screen and (min-width: 767px) {
+  .galleryComponent-photoContainer {
+    grid-template-columns: repeat(3, 3fr);
   }
-  
-  @media only screen and (min-width: 767px) {
-    .galleryComponent-photoContainer {
-      grid-template-columns: repeat(3, 3fr);
-    }
-  }
+}
 
-  @media only screen and (min-width: 1024px) {
-    .galleryComponent-photoContainer {
-      grid-template-columns: repeat(5, 3fr);
-    }
+/* -- MAKES PHOTOCONTAINER RESPONSIVE */
+@media only screen and (min-width: 1024px) {
+  .galleryComponent-photoContainer {
+    grid-template-columns: repeat(5, 3fr);
   }
+}
 
-  @media only screen and (min-width: 1920px) {
-    .galleryComponent-photoContainer {
-      grid-template-columns: repeat(8, 3fr);
-    }
+/* -- MAKES PHOTOCONTAINER RESPONSIVE */
+@media only screen and (min-width: 1920px) {
+  .galleryComponent-photoContainer {
+    grid-template-columns: repeat(8, 3fr);
   }
-/*   
-  @media only screen and (min-width: 768px) and (max-width: 1023px) {
-    .galleryComponent-photoContainer {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  
-  @media only screen and (min-width: 1024px) {
-    .galleryComponent-photoContainer {
-      grid-template-columns: repeat(6, 1fr);
-    }
-  } */
-  
-  .galleryComponent-photoContainer-img {
-    height: 200px;
-    object-fit: cover;
-    width: 100%;
-    border-radius: var(--border-radius);
-  }
+}
+
+/* GALLERYCOMPONENTS PHOTOCONTAINER IMG */
+.galleryComponent-photoContainer-img {
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+  border-radius: var(--border-radius);
+}

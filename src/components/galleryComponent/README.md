@@ -86,3 +86,14 @@ project-root/
 ├── .gitignore
 ├── package-lock.json
 └── package.json
+
+## Build Instructions
+
+1. Install Node.js and npm.
+2. Clone this repository.
+3. Navigate to the project's root directory in the terminal.
+4. Run the following commands:
+
+   ```bash
+   npm install
+   npm run build

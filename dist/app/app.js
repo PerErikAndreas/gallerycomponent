@@ -1,10 +1,11 @@
+"use strict";
+
+require("../components/testFooterComponent/testFooterComponent.js");
+require("../components/testHeaderComponent/testHeaderComponent.js");
+require("../components/galleryComponent/galleryComponent.js");
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////// IMPORTS ////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
-
-import '../components/testFooterComponent/testFooterComponent.js';
-import '../components/testHeaderComponent/testHeaderComponent.js';
-import '../components/galleryComponent/galleryComponent.js';
 
 //////////////////////////////////////////////////////////////////////////////
 ///////////////////////// CREATE CONTAINER ELEMENTS //////////////////////////
@@ -12,10 +13,8 @@ import '../components/galleryComponent/galleryComponent.js';
 
 const testHeaderComponent = document.createElement('div');
 testHeaderComponent.id = 'testHeaderComponent';
-
 const galleryComponent = document.createElement('div');
 galleryComponent.id = 'galleryComponent';
-
 const testFooterComponent = document.createElement('div');
 testFooterComponent.id = 'testFooterComponent';
 
