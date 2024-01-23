@@ -1,8 +1,9 @@
 .testFooterComponent-container {
     background: palevioletred;
-    margin: 16px;
+    margin-top: 16px;
     border-radius: 10px;
 }
 
 .testFooterComponent-title {
-    padding: 16px;}
+    padding: 16px;
+}

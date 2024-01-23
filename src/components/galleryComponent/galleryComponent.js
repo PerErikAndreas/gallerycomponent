@@ -9,53 +9,53 @@ import { API_URLS } from './urls.js';
 //////////////////////////////////////////////////////////////////////////////
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Connection for the component container where everything will be rendered.
+  // The connection to the main container where everything will be rendered.
   const galleryComponent = document.getElementById("galleryComponent");
   const photoContainer = createPhotoContainer();
 
-  let isFetching = false;
-  let currentPage = 1;
-  let currentScrollPosition = 0; // Variable to store the current scroll position
+  let isFetching = false; // Initial fetch status
+  let currentPage = 1; // Initial pagenumber
+  let currentScrollPosition = 0; // Initial scroll position
 
-  // Append the galleryComponent to the main container
-  galleryComponent.appendChild(createGalleryComponent());
+  // Append the header created by createHeader to the galleryComponent
+  galleryComponent.appendChild(createHeader());
   
+  // Fetch initial data
   fetchResults();
 
 //////////////////////////////////////////////////////////////////////////////
-///////////////////////////// ENDLESS SCROLL /////////////////////////////////
+///////////////// PHOTOCONTAINER & WINDOW ENDLESS SCROLL /////////////////////
 //////////////////////////////////////////////////////////////////////////////
+
+// // KOLLA OM SCROLLHEIGHT ÄR STÖRRE ÄN OFFSETHEIGHT
+// if (photoContainer.scrollHeight > photoContainer.offsetHeight) {
 
 photoContainer.addEventListener("scroll", function () {
   // Check if the user has scrolled to the bottom of the galleryComponent
-  if (photoContainer.scrollTop + galleryComponent.clientHeight >= photoContainer.scrollHeight - 10) {
+  if (photoContainer.scrollTop + photoContainer.clientHeight >= photoContainer.scrollHeight - 300) {
     if (!isFetching) {
       currentScrollPosition = photoContainer.scrollTop;
       isFetching = true;
       currentPage++;
       fetchResults();
-      setTimeout(() => {
-        isFetching = false; // MOTIVERA DETTA
-      }, 1000);
     }
   }
 });
-
-//////////////////////////////////////////////////////////////////////////////
-////////////////////////// CREATE MAIN COMPONENT /////////////////////////////
-//////////////////////////////////////////////////////////////////////////////
-
-  function createGalleryComponent() {
-    // GALLERY-CONTAINER
-    const galleryComponent = document.createElement("div");
-    galleryComponent.className = "galleryComponent";
-
-    // Create and append the header
-    const header = createHeader();
-    galleryComponent.appendChild(header);
-
-    return galleryComponent;
-  }
+// } else {
+//   window.addEventListener("scroll", function () {
+//     console.log("window.pageYOffset = " + window.pageYOffset)
+//     console.log("clientHeight = " + window.innerHeight)
+//     // Check if the user has scrolled to the bottom of the galleryComponent
+//     if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 300) {
+//       if (!isFetching) {
+//         currentScrollPosition = photoContainer.scrollTop;
+//         isFetching = true;
+//         currentPage++;
+//         fetchResults(); // kolla om functionen kan styra ifall den fått bilder så blir isFetching = false
+//       }
+//     }
+//   });
+// }
 
 //////////////////////////////////////////////////////////////////////////////
 ////////////////////////////// CREATE HEADER /////////////////////////////////
@@ -93,12 +93,10 @@ photoContainer.addEventListener("scroll", function () {
     // Attach an event listener to the search form
     searchForm.addEventListener("submit", function (event) {
       event.preventDefault(); // Prevent the default form submission behavior // LÄS PÅ!
-
-      // Reset page number on form submission
-      currentPage = 1;
+      photoContainer.innerHTML = "";
 
       // Fetch results
-      fetchResults(); // ???????
+      fetchResults();
     });
 
     return header;
@@ -113,6 +111,10 @@ photoContainer.addEventListener("scroll", function () {
     container.classList.add("galleryComponent-photoContainer");
     return container;
   }
+
+  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////// CREATE PHOTO ////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
 
   function createImgElement(photo) {
     const imgElement = document.createElement("img");
@@ -135,10 +137,9 @@ photoContainer.addEventListener("scroll", function () {
     return loader;
   }
 //////////////////////////////////////////////////////////////////////////////
-///////////////////////// FETCH THE PHOTO FROM SERVER ////////////////////////
+//////////////////////// FETCH PHOTOS FROM SERVER ////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 
-// Inside your fetchResults function
 function fetchResults() {
   const searchInput = document.getElementById("galleryComponent-header-input");
 
@@ -154,8 +155,6 @@ function fetchResults() {
         return response.json();
       })
       .then((data) => {
-        // photoContainer.innerHTML = "";
-
         if (Array.isArray(data.photos.photo)) { // motivera detta
           data.photos.photo.forEach((photo) => {
             const imgElement = createImgElement(photo);
@@ -171,9 +170,10 @@ function fetchResults() {
         console.error("Fetch error:", error);
       })
       .finally(() => {
-        photoContainer.removeChild(loader); // Settime
+        photoContainer.removeChild(loader);
+        isFetching = false;
       });
   }
-}
-  }
-);
+}});
+
+

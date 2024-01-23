@@ -32,6 +32,11 @@ Before you start using the galleryComponent, make sure you have your own Flickr 
 
 2. Inside the `.env` file, placed in this projects root, replace the FLICKR_API_KEY with your own key
 
+
+
+
+ENV filen förändringar
+
 ### Technology Stack
 
 - **Frontend:**
