@@ -25,12 +25,20 @@ galleryComponent is a straightforward component enabling users to search for ima
 
 ## Configuration
 
+- **Flickr Key:**
+
 Before you start using the galleryComponent, make sure you have your own Flickr API key.
 Follow these steps to set it up:
 
 1. Visit the Flickr App Garden to request an API Key (https://www.flickr.com/services/apps/create/).
 
 2. Inside the `.env` file, placed in this projects root, replace the FLICKR_API_KEY with your own key
+
+- **Components Proportions:**
+
+The component is default set to a 100% width to fill its own container and the height can be adjusted accordingly:
+
+1. Inside src/components/galleryComponent/galleryComponent.css - Adjust class .galleryComponent-photoContainer - height.
 
 ### Technology Stack
 
