@@ -24,11 +24,11 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchResults();
 
   //////////////////////////////////////////////////////////////////////////////
-  ///////////////// PHOTOCONTAINER & WINDOW ENDLESS SCROLL /////////////////////
+  ////////////////////// PHOTOCONTAINER ENDLESS SCROLL /////////////////////////
   //////////////////////////////////////////////////////////////////////////////
 
-  // // KOLLA OM SCROLLHEIGHT ÄR STÖRRE ÄN OFFSETHEIGHT
-  // if (photoContainer.scrollHeight > photoContainer.offsetHeight) {
+  // Trying to implement conditionals to check if the the user is at the bottom of the window
+  // or the bottom om the photocontainer. 
 
   photoContainer.addEventListener("scroll", function () {
     // Check if the user has scrolled to the bottom of the galleryComponent
@@ -41,21 +41,24 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
-  // } else {
-  //   window.addEventListener("scroll", function () {
-  //     console.log("window.pageYOffset = " + window.pageYOffset)
-  //     console.log("clientHeight = " + window.innerHeight)
-  //     // Check if the user has scrolled to the bottom of the galleryComponent
-  //     if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 300) {
-  //       if (!isFetching) {
-  //         currentScrollPosition = photoContainer.scrollTop;
-  //         isFetching = true;
-  //         currentPage++;
-  //         fetchResults(); // kolla om functionen kan styra ifall den fått bilder så blir isFetching = false
-  //       }
-  //     }
-  //   });
-  // }
+
+  //////////////////////////////////////////////////////////////////////////////
+  /////////////////////////// WINDOW ENDLESS SCROLL ////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
+
+  window.addEventListener("scroll", function () {
+    console.log("window.pageYOffset = " + window.pageYOffset);
+    console.log("clientHeight = " + window.innerHeight);
+    // Check if the user has scrolled to the bottom of the galleryComponent
+    if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 300) {
+      if (!isFetching) {
+        currentScrollPosition = photoContainer.scrollTop;
+        isFetching = true;
+        currentPage++;
+        fetchResults();
+      }
+    }
+  });
 
   //////////////////////////////////////////////////////////////////////////////
   ////////////////////////////// CREATE HEADER /////////////////////////////////
@@ -92,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Attach an event listener to the search form
     searchForm.addEventListener("submit", function (event) {
-      event.preventDefault(); // Prevent the default form submission behavior // LÄS PÅ!
+      event.preventDefault(); // Prevent the page from reloading
       photoContainer.innerHTML = "";
 
       // Fetch results
@@ -144,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const loader = createLoader(photoContainer);
       fetch(`${_urls.API_URLS.SEARCH}?text=${searchTerm}&page=${currentPage}`).then(response => {
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`); // läs på
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
         return response.json();
       }).then(data => {

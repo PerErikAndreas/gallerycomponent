@@ -2,6 +2,8 @@
 // it readable for a broders range of enviroments
 {
     "presets": [
-        ["@babel/preset-env", { "targets": { "node": "current" } }]
+      ["@babel/preset-env", { "targets": { "node": "current" } }],
+      "dotenv"
     ]
-}
+  }
+  
