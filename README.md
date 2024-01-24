@@ -31,7 +31,7 @@ The Flicker API key has ben removed from the .env file. Before you start using t
 
 1. Visit the Flickr App Garden to request an API Key (https://www.flickr.com/services/apps/create/).
 
-2. Inside the `.env` file, placed in this projects root, replace the FLICKR_API_KEY with your own key.
+2. Inside the `.env` file, placed in this projects root, replace the placeholder for the FLICKR_API_KEY with your own key.
 
 - **Components Proportions:**
 
