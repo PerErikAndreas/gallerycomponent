@@ -45,7 +45,7 @@ Follow these steps to set it up:
 
 ### Project Structure
 
-ANDREAS-CYGNI-TEST/
+PROJECT-WITH-GALLERYCOMPONENT/
 │
 ├── node_modules/
 │
@@ -90,10 +90,10 @@ The responsiveness of the component was tested on a range of devices and screen 
 
 ## Installation
 
-1. Clone the repository: git clone https://github.com/PerErikAndreas/gallerycomponent.git OR download the folder ANDREAS-CYGNI-TEST.
+1. Download the folder Project-with-galleryComponent.
 
-2. Navigate to the project directory:
-cd ANDREAS-CYGNI-TEST.
+2. Navigate to the project directory in your codeeditors terminal:
+cd Project-with-galleryComponent.
 
 3. Install dependencies:
 npm install
@@ -105,4 +105,6 @@ npm run build
 npm start
 
 6. Open the gallery.html file in a web browser:
-open public/index.html
+- macOS: open public/index.html
+- windows: start public/index.html 
+- OR rightclick the index.html file in public folder to open with Live Server

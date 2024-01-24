@@ -47,9 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
   //////////////////////////////////////////////////////////////////////////////
 
   window.addEventListener("scroll", function () {
-    console.log("window.pageYOffset = " + window.pageYOffset);
-    console.log("clientHeight = " + window.innerHeight);
-    // Check if the user has scrolled to the bottom of the galleryComponent
+    // Check if the user has scrolled to the bottom of the browser window
     if (window.innerHeight + window.pageYOffset >= document.documentElement.scrollHeight - 300) {
       if (!isFetching) {
         currentScrollPosition = photoContainer.scrollTop;
