@@ -104,7 +104,7 @@ npm run build
 5. Start the server:
 npm start
 
-6. Open the gallery.html file in a web browser:
-- macOS: open public/index.html
-- windows: start public/index.html 
+6. Open the index.html file in a web browser:
+- macOS terminal: open public/index.html
+- windows terminal: start public/index.html 
 - OR rightclick the index.html file in public folder to open with Live Server
