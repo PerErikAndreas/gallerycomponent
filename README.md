@@ -27,12 +27,11 @@ galleryComponent is a straightforward component enabling users to search for ima
 
 - **Flickr Key:**
 
-Before you start using the galleryComponent, make sure you have your own Flickr API key.
-Follow these steps to set it up:
+The Flicker API key has ben removed from the .env file. Before you start using the galleryComponent, make sure you have your own Flickr API key. Follow these steps to set one up:
 
 1. Visit the Flickr App Garden to request an API Key (https://www.flickr.com/services/apps/create/).
 
-2. Inside the `.env` file, placed in this projects root, replace the FLICKR_API_KEY with your own key
+2. Inside the `.env` file, placed in this projects root, replace the FLICKR_API_KEY with your own key.
 
 - **Components Proportions:**
 
@@ -98,19 +97,17 @@ The responsiveness of the component was tested on a range of devices and screen 
 
 ## Installation
 
-1. Download the folder Project-with-galleryComponent.
+1. Replace the FLICKR_API_KEY inside the `.env`.
+See configuration part above.
 
-2. Navigate to the project directory in your codeeditors terminal:
-cd Project-with-galleryComponent.
-
-3. Install dependencies:
+2. Install dependencies:
 npm install
 
-4. Build the project:
+3. Build the project:
 npm run build
 
-5. Start the server:
+4. Start the server:
 npm start
 
-6. Open the index.html file in a web browser:
-Rightclick the index.html file in public folder to Open with Live Server
+5. Open the index.html:
+Open the public/index.html file in your web browser.
