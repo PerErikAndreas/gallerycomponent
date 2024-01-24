@@ -105,6 +105,4 @@ npm run build
 npm start
 
 6. Open the index.html file in a web browser:
-- macOS terminal: open public/index.html
-- windows terminal: start public/index.html 
-- OR rightclick the index.html file in public folder to open with Live Server
+Rightclick the index.html file in public folder to Open with Live Server
